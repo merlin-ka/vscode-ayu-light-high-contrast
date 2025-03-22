@@ -2,7 +2,7 @@
   "name": "vscode-ayu-light-high-contrast",
   "displayName": "Ayu Light High Contrast",
   "description": "The Ayu Light theme with increased contrast for VS Code",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "publisher": "merlin-ka",
   "license": "MIT",
   "repository": {
