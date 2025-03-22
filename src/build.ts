@@ -1,15 +1,13 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import template, { SchemeName } from './template';
+import template from './template';
 
-const filePath = (variant: string, bordered: boolean) =>
-  path.join(process.cwd(), `/ayu-${variant}${bordered ? '-bordered' : ''}.json`);
+const filePath = (bordered: boolean) =>
+  path.join(process.cwd(), `/ayu-light${bordered ? '-bordered' : ''}.json`);
 
-['light', 'dark', 'mirage'].map((variant: SchemeName) => {
-  const bordered = JSON.stringify(template(variant, true), null, '\t');
-  const nonBordered = JSON.stringify(template(variant, false), null, '\t');
+const bordered = JSON.stringify(template(true), null, '\t');
+const nonBordered = JSON.stringify(template(false), null, '\t');
 
-  fs.writeFileSync(filePath(variant, true), bordered);
-  fs.writeFileSync(filePath(variant, false), nonBordered);
-  console.log(`Updated ${variant}`);
-});
+fs.writeFileSync(filePath(true), bordered);
+fs.writeFileSync(filePath(false), nonBordered);
+console.log(`Updated`);

@@ -1,32 +1,34 @@
-import * as ayu from 'ayu';
+import { light as scheme } from 'ayu';
+import { Color } from 'ayu/dist/color';
 
-export type SchemeName = 'light' | 'dark' | 'mirage';
+function darken(color: Color, amount: number) {
+  // To avoid writing something like this all the time:
+  // scheme.syntax.keyword = scheme.syntax.keyword.darken(...)
+  // We use this helper function to change the private `color` property on the `Color` class (thanks, `any`)
+  // (see https://github.com/ayu-theme/ayu-colors/blob/master/src/color.ts)
+  (color as any).color = color.darken(amount);
+}
+
+darken(scheme.syntax.keyword, 0.5);
+darken(scheme.syntax.entity, 0.5);
+darken(scheme.syntax.comment, 0.5);
+darken(scheme.syntax.func, 0.7);
+darken(scheme.syntax.constant, 0.2);
+darken(scheme.syntax.regexp, 0.7);
+darken(scheme.syntax.markup, 0.9);
+darken(scheme.syntax.tag, 0.5);
+darken(scheme.syntax.special, 0.5);
+darken(scheme.common.accent, 0.3);
 
 const terminalColors = {
-  light: {
-    black: '#000000',
-    white: '#c7c7c7',
-    brightBlack: '#686868',
-    brightWhite: '#d1d1d1',
-  },
-  dark: {
-    black: ayu.dark.ui.line.hex(),
-    white: '#c7c7c7',
-    brightBlack: '#686868',
-    brightWhite: '#ffffff',
-  },
-  mirage: {
-    black: ayu.mirage.ui.line.hex(),
-    white: '#c7c7c7',
-    brightBlack: '#686868',
-    brightWhite: '#ffffff',
-  },
+  black: '#000000',
+  white: '#c7c7c7',
+  brightBlack: '#686868',
+  brightWhite: '#d1d1d1',
 };
 
-export default (variant: SchemeName, bordered: boolean) => {
-  const scheme = ayu[variant];
+export default (bordered: boolean) => {
   return {
-    type: variant === 'light' ? 'light' : 'dark',
     colors: {
       // Colour reference https://code.visualstudio.com/docs/getstarted/theme-color-reference
 
@@ -66,15 +68,9 @@ export default (variant: SchemeName, bordered: boolean) => {
       'input.border': scheme.ui.fg.alpha(0.27).hex(),
       'input.foreground': scheme.editor.fg.hex(),
       'input.placeholderForeground': scheme.ui.fg.alpha(0.5).hex(),
-      'inputOption.activeBorder': (variant == 'light'
-        ? scheme.common.accent.darken(0.2)
-        : scheme.common.accent
-      )
-        .alpha(0.3)
-        .hex(),
+      'inputOption.activeBorder': scheme.common.accent.darken(0.2).alpha(0.3).hex(),
       'inputOption.activeBackground': scheme.common.accent.alpha(0.2).hex(),
-      'inputOption.activeForeground':
-        variant == 'light' ? scheme.common.accent.darken(0.2).hex() : scheme.common.accent.hex(),
+      'inputOption.activeForeground': scheme.common.accent.darken(0.2).hex(),
       'inputValidation.errorBackground': scheme.editor.bg.hex(),
       'inputValidation.errorBorder': scheme.common.error.hex(),
       'inputValidation.infoBackground': scheme.ui.bg.hex(),
@@ -90,8 +86,7 @@ export default (variant: SchemeName, bordered: boolean) => {
 
       // BADGE
       'badge.background': scheme.common.accent.alpha(0.2).hex(),
-      'badge.foreground':
-        variant == 'light' ? scheme.common.accent.darken(0.2).hex() : scheme.common.accent.hex(),
+      'badge.foreground': scheme.common.accent.darken(0.2).hex(),
 
       // PROGRESS BAR
       'progressBar.background': scheme.common.accent.hex(),
@@ -377,22 +372,22 @@ export default (variant: SchemeName, bordered: boolean) => {
       // TERMINAL
       'terminal.background': scheme.ui.bg.hex(),
       'terminal.foreground': scheme.editor.fg.hex(),
-      'terminal.ansiBlack': terminalColors[variant].black,
+      'terminal.ansiBlack': terminalColors.black,
       'terminal.ansiRed': scheme.syntax.markup.darken(0.1).hex(),
       'terminal.ansiGreen': scheme.vcs.added.hex(),
       'terminal.ansiYellow': scheme.syntax.func.darken(0.1).hex(),
       'terminal.ansiBlue': scheme.syntax.entity.darken(0.1).hex(),
       'terminal.ansiMagenta': scheme.syntax.constant.darken(0.1).hex(),
       'terminal.ansiCyan': scheme.syntax.regexp.darken(0.1).hex(),
-      'terminal.ansiWhite': terminalColors[variant].white,
-      'terminal.ansiBrightBlack': terminalColors[variant].brightBlack,
+      'terminal.ansiWhite': terminalColors.white,
+      'terminal.ansiBrightBlack': terminalColors.brightBlack,
       'terminal.ansiBrightRed': scheme.syntax.markup.hex(),
       'terminal.ansiBrightGreen': scheme.syntax.string.hex(),
       'terminal.ansiBrightYellow': scheme.syntax.func.hex(),
       'terminal.ansiBrightBlue': scheme.syntax.entity.hex(),
       'terminal.ansiBrightMagenta': scheme.syntax.constant.hex(),
       'terminal.ansiBrightCyan': scheme.syntax.regexp.hex(),
-      'terminal.ansiBrightWhite': terminalColors[variant].brightWhite,
+      'terminal.ansiBrightWhite': terminalColors.brightWhite,
     },
 
     tokenColors: [
@@ -415,7 +410,7 @@ export default (variant: SchemeName, bordered: boolean) => {
         name: 'String',
         scope: ['string', 'constant.other.symbol'], //+
         settings: {
-          foreground: scheme.syntax.string.hex(),
+          foreground: scheme.syntax.string.darken(0.5).hex(),
         },
       },
       {
@@ -645,7 +640,7 @@ export default (variant: SchemeName, bordered: boolean) => {
           'punctuation.definition.tag',
         ],
         settings: {
-          foreground: scheme.syntax.tag.alpha(0.5).hex(),
+          foreground: scheme.syntax.tag.alpha(0.8).hex(),
         },
       },
       {
@@ -806,14 +801,14 @@ export default (variant: SchemeName, bordered: boolean) => {
         name: 'Markup Code',
         scope: ['markup.raw'],
         settings: {
-          background: scheme.editor.fg.alpha(0.02).hex(),
+          background: scheme.editor.fg.alpha(0.2).hex(),
         },
       },
       {
         name: 'Markup Code Inline',
         scope: ['markup.raw.inline'],
         settings: {
-          background: scheme.editor.fg.alpha(0.06).hex(),
+          background: scheme.editor.fg.alpha(0.2).hex(),
         },
       },
       {
@@ -821,7 +816,7 @@ export default (variant: SchemeName, bordered: boolean) => {
         scope: ['meta.separator'],
         settings: {
           fontStyle: 'bold',
-          background: scheme.editor.fg.alpha(0.06).hex(),
+          background: scheme.editor.fg.alpha(0.1).hex(),
           foreground: scheme.syntax.comment.hex(),
         },
       },
@@ -872,7 +867,7 @@ export default (variant: SchemeName, bordered: boolean) => {
         name: 'Markup Table',
         scope: ['markup.table'],
         settings: {
-          background: scheme.editor.fg.alpha(0.06).hex(),
+          background: scheme.editor.fg.alpha(0.2).hex(),
           foreground: scheme.syntax.tag.hex(),
         },
       },
