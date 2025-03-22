@@ -1,30 +1,30 @@
-import * as ayu from 'ayu'
+import * as ayu from 'ayu';
 
-export type SchemeName = 'light' | 'dark' | 'mirage'
+export type SchemeName = 'light' | 'dark' | 'mirage';
 
 const terminalColors = {
   light: {
     black: '#000000',
     white: '#c7c7c7',
     brightBlack: '#686868',
-    brightWhite: '#d1d1d1'
+    brightWhite: '#d1d1d1',
   },
   dark: {
     black: ayu.dark.ui.line.hex(),
     white: '#c7c7c7',
     brightBlack: '#686868',
-    brightWhite: '#ffffff'
+    brightWhite: '#ffffff',
   },
   mirage: {
     black: ayu.mirage.ui.line.hex(),
     white: '#c7c7c7',
     brightBlack: '#686868',
-    brightWhite: '#ffffff'
-  }
-}
+    brightWhite: '#ffffff',
+  },
+};
 
 export default (variant: SchemeName, bordered: boolean) => {
-  const scheme = ayu[variant]
+  const scheme = ayu[variant];
   return {
     type: variant === 'light' ? 'light' : 'dark',
     colors: {
@@ -66,7 +66,10 @@ export default (variant: SchemeName, bordered: boolean) => {
       'input.border': scheme.ui.fg.alpha(0.27).hex(),
       'input.foreground': scheme.editor.fg.hex(),
       'input.placeholderForeground': scheme.ui.fg.alpha(0.5).hex(),
-      'inputOption.activeBorder': (variant == 'light' ? scheme.common.accent.darken(0.2) : scheme.common.accent)
+      'inputOption.activeBorder': (variant == 'light'
+        ? scheme.common.accent.darken(0.2)
+        : scheme.common.accent
+      )
         .alpha(0.3)
         .hex(),
       'inputOption.activeBackground': scheme.common.accent.alpha(0.2).hex(),
@@ -87,7 +90,8 @@ export default (variant: SchemeName, bordered: boolean) => {
 
       // BADGE
       'badge.background': scheme.common.accent.alpha(0.2).hex(),
-      'badge.foreground': variant == 'light' ? scheme.common.accent.darken(0.2).hex() : scheme.common.accent.hex(),
+      'badge.foreground':
+        variant == 'light' ? scheme.common.accent.darken(0.2).hex() : scheme.common.accent.hex(),
 
       // PROGRESS BAR
       'progressBar.background': scheme.common.accent.hex(),
@@ -388,76 +392,76 @@ export default (variant: SchemeName, bordered: boolean) => {
       'terminal.ansiBrightBlue': scheme.syntax.entity.hex(),
       'terminal.ansiBrightMagenta': scheme.syntax.constant.hex(),
       'terminal.ansiBrightCyan': scheme.syntax.regexp.hex(),
-      'terminal.ansiBrightWhite': terminalColors[variant].brightWhite
+      'terminal.ansiBrightWhite': terminalColors[variant].brightWhite,
     },
 
     tokenColors: [
       {
         settings: {
           background: scheme.ui.bg.hex(),
-          foreground: scheme.editor.fg.hex()
-        }
+          foreground: scheme.editor.fg.hex(),
+        },
       },
       {
         name: 'Comment',
         scope: ['comment'],
         settings: {
           fontStyle: 'italic',
-          foreground: scheme.syntax.comment.hex()
-        }
+          foreground: scheme.syntax.comment.hex(),
+        },
       },
 
       {
         name: 'String',
         scope: ['string', 'constant.other.symbol'], //+
         settings: {
-          foreground: scheme.syntax.string.hex()
-        }
+          foreground: scheme.syntax.string.hex(),
+        },
       },
       {
         name: 'Regular Expressions and Escape Characters',
         scope: ['string.regexp', 'constant.character', 'constant.other'],
         settings: {
-          foreground: scheme.syntax.regexp.hex()
-        }
+          foreground: scheme.syntax.regexp.hex(),
+        },
       },
 
       {
         name: 'Number',
         scope: ['constant.numeric'],
         settings: {
-          foreground: scheme.syntax.constant.hex()
-        }
+          foreground: scheme.syntax.constant.hex(),
+        },
       },
       {
         name: 'Built-in constants',
         scope: ['constant.language'],
         settings: {
-          foreground: scheme.syntax.constant.hex()
-        }
+          foreground: scheme.syntax.constant.hex(),
+        },
       },
 
       {
         name: 'Variable',
         scope: ['variable', 'variable.parameter.function-call'],
         settings: {
-          foreground: scheme.editor.fg.hex()
-        }
+          foreground: scheme.editor.fg.hex(),
+        },
       },
       {
         name: 'Member Variable',
         scope: ['variable.member'],
         settings: {
-          foreground: scheme.syntax.markup.hex()
-        }
+          foreground: scheme.syntax.markup.hex(),
+        },
       },
       {
         name: 'Language variable',
         scope: ['variable.language'],
         settings: {
           fontStyle: 'italic',
-          foreground: scheme.syntax.tag.hex()
-        }
+          foreground: scheme.syntax.tag.hex(),
+        },
       },
 
       // ------
@@ -466,15 +470,15 @@ export default (variant: SchemeName, bordered: boolean) => {
         name: 'Storage',
         scope: ['storage'],
         settings: {
-          foreground: scheme.syntax.keyword.hex()
-        }
+          foreground: scheme.syntax.keyword.hex(),
+        },
       },
       {
         name: 'Keyword',
         scope: ['keyword'],
         settings: {
-          foreground: scheme.syntax.keyword.hex()
-        }
+          foreground: scheme.syntax.keyword.hex(),
+        },
       },
 
       // ------
@@ -483,8 +487,8 @@ export default (variant: SchemeName, bordered: boolean) => {
         name: 'Operators',
         scope: ['keyword.operator'],
         settings: {
-          foreground: scheme.syntax.operator.hex()
-        }
+          foreground: scheme.syntax.operator.hex(),
+        },
       },
 
       // ------
@@ -493,43 +497,43 @@ export default (variant: SchemeName, bordered: boolean) => {
         name: 'Separators like ; or ,',
         scope: ['punctuation.separator', 'punctuation.terminator'],
         settings: {
-          foreground: scheme.editor.fg.alpha(0.7).hex()
-        }
+          foreground: scheme.editor.fg.alpha(0.7).hex(),
+        },
       },
       {
         name: 'Punctuation',
         scope: ['punctuation.section'],
         settings: {
-          foreground: scheme.editor.fg.hex()
-        }
+          foreground: scheme.editor.fg.hex(),
+        },
       },
       {
         name: 'Accessor',
         scope: ['punctuation.accessor'],
         settings: {
-          foreground: scheme.syntax.operator.hex()
-        }
+          foreground: scheme.syntax.operator.hex(),
+        },
       },
       {
         name: 'JavaScript/TypeScript interpolation punctuation',
         scope: ['punctuation.definition.template-expression'],
         settings: {
-          foreground: scheme.syntax.keyword.hex()
-        }
+          foreground: scheme.syntax.keyword.hex(),
+        },
       },
       {
         name: 'Ruby interpolation punctuation',
         scope: ['punctuation.section.embedded'],
         settings: {
-          foreground: scheme.syntax.keyword.hex()
-        }
+          foreground: scheme.syntax.keyword.hex(),
+        },
       },
       {
         name: 'Interpolation text',
         scope: ['meta.embedded'],
         settings: {
-          foreground: scheme.editor.fg.hex()
-        }
+          foreground: scheme.editor.fg.hex(),
+        },
       },
 
       // ------
@@ -538,30 +542,30 @@ export default (variant: SchemeName, bordered: boolean) => {
         name: 'Types fixes',
         scope: ['source.java storage.type', 'source.haskell storage.type', 'source.c storage.type'],
         settings: {
-          foreground: scheme.syntax.entity.hex()
-        }
+          foreground: scheme.syntax.entity.hex(),
+        },
       },
       {
         name: 'Inherited class type',
         scope: ['entity.other.inherited-class'],
         settings: {
-          foreground: scheme.syntax.tag.hex()
-        }
+          foreground: scheme.syntax.tag.hex(),
+        },
       },
       // Fixes
       {
         name: 'Lambda arrow',
         scope: ['storage.type.function'],
         settings: {
-          foreground: scheme.syntax.keyword.hex()
-        }
+          foreground: scheme.syntax.keyword.hex(),
+        },
       },
       {
         name: 'Java primitive variable types',
         scope: ['source.java storage.type.primitive'],
         settings: {
-          foreground: scheme.syntax.tag.hex()
-        }
+          foreground: scheme.syntax.tag.hex(),
+        },
       },
 
       // ------
@@ -571,29 +575,34 @@ export default (variant: SchemeName, bordered: boolean) => {
         name: 'Function name',
         scope: ['entity.name.function'],
         settings: {
-          foreground: scheme.syntax.func.hex()
-        }
+          foreground: scheme.syntax.func.hex(),
+        },
       },
       {
         name: 'Function arguments',
         scope: ['variable.parameter', 'meta.parameter'],
         settings: {
-          foreground: scheme.syntax.constant.hex()
-        }
+          foreground: scheme.syntax.constant.hex(),
+        },
       },
       {
         name: 'Function call',
-        scope: ['variable.function', 'variable.annotation', 'meta.function-call.generic', 'support.function.go'],
+        scope: [
+          'variable.function',
+          'variable.annotation',
+          'meta.function-call.generic',
+          'support.function.go',
+        ],
         settings: {
-          foreground: scheme.syntax.func.hex()
-        }
+          foreground: scheme.syntax.func.hex(),
+        },
       },
       {
         name: 'Library function',
         scope: ['support.function', 'support.macro'],
         settings: {
-          foreground: scheme.syntax.markup.hex()
-        }
+          foreground: scheme.syntax.markup.hex(),
+        },
       },
 
       // ------
@@ -602,15 +611,15 @@ export default (variant: SchemeName, bordered: boolean) => {
         name: 'Imports and packages',
         scope: ['entity.name.import', 'entity.name.package'],
         settings: {
-          foreground: scheme.syntax.string.hex()
-        }
+          foreground: scheme.syntax.string.hex(),
+        },
       },
       {
         name: 'Entity name',
         scope: ['entity.name'],
         settings: {
-          foreground: scheme.syntax.entity.hex()
-        }
+          foreground: scheme.syntax.entity.hex(),
+        },
       },
 
       // Tag and their attributes
@@ -618,29 +627,33 @@ export default (variant: SchemeName, bordered: boolean) => {
         name: 'Tag',
         scope: ['entity.name.tag', 'meta.tag.sgml'],
         settings: {
-          foreground: scheme.syntax.tag.hex()
-        }
+          foreground: scheme.syntax.tag.hex(),
+        },
       },
       {
         name: 'JSX Component',
         scope: ['support.class.component'],
         settings: {
-          foreground: scheme.syntax.entity.hex()
-        }
+          foreground: scheme.syntax.entity.hex(),
+        },
       },
       {
         name: 'Tag start/end',
-        scope: ['punctuation.definition.tag.end', 'punctuation.definition.tag.begin', 'punctuation.definition.tag'],
+        scope: [
+          'punctuation.definition.tag.end',
+          'punctuation.definition.tag.begin',
+          'punctuation.definition.tag',
+        ],
         settings: {
-          foreground: scheme.syntax.tag.alpha(0.5).hex()
-        }
+          foreground: scheme.syntax.tag.alpha(0.5).hex(),
+        },
       },
       {
         name: 'Tag attribute',
         scope: ['entity.other.attribute-name'],
         settings: {
-          foreground: scheme.syntax.func.hex()
-        }
+          foreground: scheme.syntax.func.hex(),
+        },
       },
 
       {
@@ -648,43 +661,47 @@ export default (variant: SchemeName, bordered: boolean) => {
         scope: ['support.constant'],
         settings: {
           fontStyle: 'italic',
-          foreground: scheme.syntax.operator.hex()
-        }
+          foreground: scheme.syntax.operator.hex(),
+        },
       },
       {
         name: 'Library class/type',
         scope: ['support.type', 'support.class', 'source.go storage.type'],
         settings: {
-          foreground: scheme.syntax.tag.hex()
-        }
+          foreground: scheme.syntax.tag.hex(),
+        },
       },
       {
         name: 'Decorators/annotation',
-        scope: ['meta.decorator variable.other', 'meta.decorator punctuation.decorator', 'storage.type.annotation'],
+        scope: [
+          'meta.decorator variable.other',
+          'meta.decorator punctuation.decorator',
+          'storage.type.annotation',
+        ],
         settings: {
-          foreground: scheme.syntax.special.hex()
-        }
+          foreground: scheme.syntax.special.hex(),
+        },
       },
       {
         name: 'Invalid',
         scope: ['invalid'],
         settings: {
-          foreground: scheme.common.error.hex()
-        }
+          foreground: scheme.common.error.hex(),
+        },
       },
       {
         name: 'diff.header',
         scope: ['meta.diff', 'meta.diff.header'],
         settings: {
-          foreground: '#c594c5'
-        }
+          foreground: '#c594c5',
+        },
       },
       {
         name: 'Ruby class methods',
         scope: ['source.ruby variable.other.readwrite'],
         settings: {
-          foreground: scheme.syntax.func.hex()
-        }
+          foreground: scheme.syntax.func.hex(),
+        },
       },
       {
         name: 'CSS tag names',
@@ -693,11 +710,11 @@ export default (variant: SchemeName, bordered: boolean) => {
           'source.sass entity.name.tag',
           'source.scss entity.name.tag',
           'source.less entity.name.tag',
-          'source.stylus entity.name.tag'
+          'source.stylus entity.name.tag',
         ],
         settings: {
-          foreground: scheme.syntax.entity.hex()
-        }
+          foreground: scheme.syntax.entity.hex(),
+        },
       },
       {
         name: 'CSS browser prefix',
@@ -706,98 +723,98 @@ export default (variant: SchemeName, bordered: boolean) => {
           'source.sass support.type',
           'source.scss support.type',
           'source.less support.type',
-          'source.stylus support.type'
+          'source.stylus support.type',
         ],
         settings: {
-          foreground: scheme.syntax.comment.hex()
-        }
+          foreground: scheme.syntax.comment.hex(),
+        },
       },
       {
         name: 'CSS Properties',
         scope: ['support.type.property-name'],
         settings: {
           fontStyle: 'normal',
-          foreground: scheme.syntax.tag.hex()
-        }
+          foreground: scheme.syntax.tag.hex(),
+        },
       },
       {
         name: 'Search Results Numbers',
         scope: ['constant.numeric.line-number.find-in-files - match'],
         settings: {
-          foreground: scheme.syntax.comment.hex()
-        }
+          foreground: scheme.syntax.comment.hex(),
+        },
       },
       {
         name: 'Search Results Match Numbers',
         scope: ['constant.numeric.line-number.match'],
         settings: {
-          foreground: scheme.syntax.keyword.hex()
-        }
+          foreground: scheme.syntax.keyword.hex(),
+        },
       },
       {
         name: 'Search Results Lines',
         scope: ['entity.name.filename.find-in-files'],
         settings: {
-          foreground: scheme.syntax.string.hex()
-        }
+          foreground: scheme.syntax.string.hex(),
+        },
       },
       {
         scope: ['message.error'],
         settings: {
-          foreground: scheme.common.error.hex()
-        }
+          foreground: scheme.common.error.hex(),
+        },
       },
       {
         name: 'Markup heading',
         scope: ['markup.heading', 'markup.heading entity.name'],
         settings: {
           fontStyle: 'bold',
-          foreground: scheme.syntax.string.hex()
-        }
+          foreground: scheme.syntax.string.hex(),
+        },
       },
       {
         name: 'Markup links',
         scope: ['markup.underline.link', 'string.other.link'],
         settings: {
-          foreground: scheme.syntax.tag.hex()
-        }
+          foreground: scheme.syntax.tag.hex(),
+        },
       },
       {
         name: 'Markup Italic',
         scope: ['markup.italic'],
         settings: {
           fontStyle: 'italic',
-          foreground: scheme.syntax.markup.hex()
-        }
+          foreground: scheme.syntax.markup.hex(),
+        },
       },
       {
         name: 'Markup Bold',
         scope: ['markup.bold'],
         settings: {
           fontStyle: 'bold',
-          foreground: scheme.syntax.markup.hex()
-        }
+          foreground: scheme.syntax.markup.hex(),
+        },
       },
       {
         name: 'Markup Bold/italic',
         scope: ['markup.italic markup.bold', 'markup.bold markup.italic'],
         settings: {
-          fontStyle: 'bold italic'
-        }
+          fontStyle: 'bold italic',
+        },
       },
       {
         name: 'Markup Code',
         scope: ['markup.raw'],
         settings: {
-          background: scheme.editor.fg.alpha(0.02).hex()
-        }
+          background: scheme.editor.fg.alpha(0.02).hex(),
+        },
       },
       {
         name: 'Markup Code Inline',
         scope: ['markup.raw.inline'],
         settings: {
-          background: scheme.editor.fg.alpha(0.06).hex()
-        }
+          background: scheme.editor.fg.alpha(0.06).hex(),
+        },
       },
       {
         name: 'Markdown Separator',
@@ -805,88 +822,88 @@ export default (variant: SchemeName, bordered: boolean) => {
         settings: {
           fontStyle: 'bold',
           background: scheme.editor.fg.alpha(0.06).hex(),
-          foreground: scheme.syntax.comment.hex()
-        }
+          foreground: scheme.syntax.comment.hex(),
+        },
       },
       {
         name: 'Markup Blockquote',
         scope: ['markup.quote'],
         settings: {
           foreground: scheme.syntax.regexp.hex(),
-          fontStyle: 'italic'
-        }
+          fontStyle: 'italic',
+        },
       },
       {
         name: 'Markup List Bullet',
         scope: ['markup.list punctuation.definition.list.begin'],
         settings: {
-          foreground: scheme.syntax.func.hex()
-        }
+          foreground: scheme.syntax.func.hex(),
+        },
       },
       {
         name: 'Markup added',
         scope: ['markup.inserted'],
         settings: {
-          foreground: scheme.vcs.added.hex()
-        }
+          foreground: scheme.vcs.added.hex(),
+        },
       },
       {
         name: 'Markup modified',
         scope: ['markup.changed'],
         settings: {
-          foreground: scheme.vcs.modified.hex()
-        }
+          foreground: scheme.vcs.modified.hex(),
+        },
       },
       {
         name: 'Markup removed',
         scope: ['markup.deleted'],
         settings: {
-          foreground: scheme.vcs.removed.hex()
-        }
+          foreground: scheme.vcs.removed.hex(),
+        },
       },
       {
         name: 'Markup Strike',
         scope: ['markup.strike'],
         settings: {
-          foreground: scheme.syntax.special.hex()
-        }
+          foreground: scheme.syntax.special.hex(),
+        },
       },
       {
         name: 'Markup Table',
         scope: ['markup.table'],
         settings: {
           background: scheme.editor.fg.alpha(0.06).hex(),
-          foreground: scheme.syntax.tag.hex()
-        }
+          foreground: scheme.syntax.tag.hex(),
+        },
       },
       {
         name: 'Markup Raw Inline',
         scope: ['text.html.markdown markup.inline.raw'],
         settings: {
-          foreground: scheme.syntax.operator.hex()
-        }
+          foreground: scheme.syntax.operator.hex(),
+        },
       },
       {
         name: 'Markdown - Line Break',
         scope: ['text.html.markdown meta.dummy.line-break'],
         settings: {
           background: scheme.syntax.comment.hex(),
-          foreground: scheme.syntax.comment.hex()
-        }
+          foreground: scheme.syntax.comment.hex(),
+        },
       },
       {
         name: 'Markdown - Raw Block Fenced',
         scope: ['punctuation.definition.markdown'],
         settings: {
           background: scheme.editor.fg.hex(),
-          foreground: scheme.syntax.comment.hex()
-        }
-      }
+          foreground: scheme.syntax.comment.hex(),
+        },
+      },
     ],
 
     semanticHighlighting: true,
     semanticTokenColors: {
-      'parameter.label': scheme.editor.fg.hex()
-    }
-  }
-}
+      'parameter.label': scheme.editor.fg.hex(),
+    },
+  };
+};
